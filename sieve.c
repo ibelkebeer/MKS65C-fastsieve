@@ -39,7 +39,7 @@ int sieve(int targetPrime){
     if(!(cur[index / 32] & (1 << (index & 31)))){
       num = potentialPrime(index);
       square = ptoi(num * num);
-      next = 2 * num;
+      next = num << 1;
       if((square - index) & 1){
         range = num + (num+1) / 3;
       }else{
