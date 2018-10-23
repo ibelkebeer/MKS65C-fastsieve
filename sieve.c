@@ -73,6 +73,15 @@ int fastsieve(int targetPrime){
   if(!(targetPrime ^ 2)){
     return 3;
   }
+  if(!(targetPrime ^ 3)){
+    return 5;
+  }
+  if(!(targetPrime ^ 4)){
+    return 7;
+  }
+  if(!(targetPrime ^ 5)){
+    return 11;
+  }
   int len;
   if(targetPrime < 5000){
     len = .4 * targetPrime * (int)log(targetPrime);
@@ -80,7 +89,7 @@ int fastsieve(int targetPrime){
     len = .398 * targetPrime * (int)log(targetPrime);
   }
   int* cur = calloc(len / 32, sizeof(int));
-  int index = 1;
+  int index = 3;
   int i = 3;
   int num;
   int square;
@@ -90,7 +99,7 @@ int fastsieve(int targetPrime){
   while(index < limit){
     if(!(cur[index / 32] & (1 << (index & 31)))){
       num = potentialPrime(index);
-      if(num % 5){
+      if(num % 5 && num % 7 && num % 11){
         square = ptoi(num * num);
         next = num << 1;
         if((square - index) & 1){
@@ -111,7 +120,7 @@ int fastsieve(int targetPrime){
   while(i ^ targetPrime - 1){
     if(!(cur[index / 32] & (1 << (index & 31)))){
       num = potentialPrime(index);
-      if(num % 5){
+      if(num % 5 && num % 7 && num % 11){
         i++;
       }
     }
@@ -121,7 +130,7 @@ int fastsieve(int targetPrime){
     index++;
   }
   num = potentialPrime(index);
-  while(cur[index / 32] & (1 << (index & 31)) || !(num % 5)){
+  while(cur[index / 32] & (1 << (index & 31)) || !(num % 5) || !(num % 7) || !(num % 11)){
     index++;
     num = potentialPrime(index);
   }
