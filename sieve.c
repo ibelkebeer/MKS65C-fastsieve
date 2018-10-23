@@ -45,13 +45,9 @@ int sieve(int targetPrime){
       }else{
         range = num - (num+1) / 3;
       }
-      next -= range;
       while(square < len){
         cur[square / 32] |= (1 << (square & 31));
-        //range = next - range;
-        range ^= next;
-        next ^= range;
-        range ^= next;
+        range = next - range;
         square += range;
       }
       i++;
