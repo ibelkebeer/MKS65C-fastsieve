@@ -4,7 +4,7 @@
 #include "sieve.h"
 
 int potentialPrime(int i){
-  if(i % 2 == 0){
+  if(!(i & 1)){
     return 5 + 3 * i;
   }
   return 4 + 3 * i;
@@ -22,10 +22,10 @@ int sieve(int targetPrime){
     return 3;
   }
   int len;
-  if(targetPrime < 1000){
-    len = .5 * targetPrime * (int)log(targetPrime);
-  }else{
+  if(targetPrime < 5000){
     len = .4 * targetPrime * (int)log(targetPrime);
+  }else{
+    len = .398 * targetPrime * (int)log(targetPrime);
   }
   int* cur = calloc(len / 32, sizeof(int));
   int index = 0;
