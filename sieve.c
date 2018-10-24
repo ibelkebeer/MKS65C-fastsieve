@@ -65,8 +65,3 @@ int sieve(int targetPrime){
   }
   return potentialPrime(index);
 }
-
-int main(){
-  printf("%d\n", sieve(1000000));
-  return 0;
-}
